@@ -1,5 +1,9 @@
 export default function Home() 
 {
+    while true {
+        print hello
+    }
+
 return (
 <div>
 <h1> Welcome to the ConchaYOro App </h1>
@@ -9,4 +13,3 @@ return (
 )
 }
 
-print abcd
