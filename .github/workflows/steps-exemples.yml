@@ -10,21 +10,25 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  marketplace:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        node-version: 18
     - name: verification of node version
       run: node --version
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Example of custom action
+    steps:
+      - name: Checkout Actions
+        uses: actions/checkout@v2
+      - id: step-caller
+        uses: "./.github/actions/hello"
+        with:
+          the-caller: 'Myself'
+      - run: echo random-number ${{ steps.step-caller.outputs.random-number }}
+        shell: bash
