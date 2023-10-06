@@ -10,12 +10,4 @@ WORKDIR /src/app
 COPY --chown=node:node package*.json ./
 COPY --chown=node:node --from=development /src/app/node_modules ./node_modules
 COPY --chown=node:node . .
-RUN npm install
-RUN pwd && ls -la 
-ENV NODE_ENV production
-RUN npm ci --only=production && npm cache clean --force
-USER node
-FROM node:16-alpine As production
-COPY --chown=node:node --from=build /src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /src/app/dist ./dist
-CMD [ "node", "dist/main.js" ]
+CMD [ "npm", "start" ]
