@@ -10,7 +10,7 @@ WORKDIR /src/app
 COPY --chown=node:node package*.json ./
 COPY --chown=node:node --from=development /src/app/node_modules ./node_modules
 COPY --chown=node:node . .
-RUN npm run build
+RUN npm build
 ENV NODE_ENV production
 RUN npm ci --only=production && npm cache clean --force
 USER node
